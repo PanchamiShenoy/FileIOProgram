@@ -25,10 +25,11 @@ public class EmployeePayrollService {
 			new EmployeePayrollFileIOService().writeData(employeePayrollList);
 		}
 	}
-	public long countEntries(IOService ioService)
-	{  
-        return new EmployeePayrollFileIOService().countEntries();
-    }
+
+	public long countEntries(IOService ioService) {
+		return new EmployeePayrollFileIOService().countEntries();
+	}
+
 	private void readEmployeePayrollData(Scanner consoleInputReader) {
 		System.out.println("Enter employee ID: ");
 		int id = consoleInputReader.nextInt();
@@ -46,6 +47,13 @@ public class EmployeePayrollService {
 		System.out.println("\nWriting Employee Payroll to Console \n" + employeePayrollList);
 	}
 
+	/*
+	 * method to print employee detail to console from file
+	 */
+	public void printData() {
+		new EmployeePayrollFileIOService().printData();
+	}
+
 	public static void main(String[] args) {
 		ArrayList<EmployeePayrollData> employeePayrollList = new ArrayList<>();
 		EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
@@ -53,6 +61,9 @@ public class EmployeePayrollService {
 		employeePayrollService.readEmployeePayrollData(consoleInputReader);
 		employeePayrollService.writeEmployeePayrollData(consoleInputReader);
 		employeePayrollService.writeEmployeePayrollData(IOService.FILE_IO);
+		System.out.println(
+				"The number of entries in the file are: " + employeePayrollService.countEntries(IOService.FILE_IO));
+		employeePayrollService.printData();
 		consoleInputReader.close();
 	}
 }
