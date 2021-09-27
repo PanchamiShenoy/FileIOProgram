@@ -54,6 +54,12 @@ public class EmployeePayrollService {
 		new EmployeePayrollFileIOService().printData();
 	}
 
+	public long readEmployeePayrollData() {
+		this.employeePayrollList = new EmployeePayrollFileIOService().readData();
+		System.out.println("new" + this.employeePayrollList.size());
+		return this.employeePayrollList.size();
+	}
+
 	public static void main(String[] args) {
 		ArrayList<EmployeePayrollData> employeePayrollList = new ArrayList<>();
 		EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
@@ -64,6 +70,7 @@ public class EmployeePayrollService {
 		System.out.println(
 				"The number of entries in the file are: " + employeePayrollService.countEntries(IOService.FILE_IO));
 		employeePayrollService.printData();
+		employeePayrollService.readEmployeePayrollData();
 		consoleInputReader.close();
 	}
 }
